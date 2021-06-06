@@ -7,11 +7,8 @@ void WaveSystem::CalculateWave(glm::vec3* positions, glm::vec3 waveDirection, fl
 	{
 		for (int j = 0; j < width; j++)
 		{
-			//positions[get_indexz(i, j)] = positions[get_indexz(i, j)] - (waveDirection / (2 * glm::pi<float>() / distBetweenWaves)) * amplitude * glm::sin(glm::dot(waveDirection, positions[get_indexz(i, j)]) - velocity * _dt);
-			//positions[get_indexz(i, j)].y = amplitude * glm::cos(glm::dot(waveDirection, positions[get_indexz(i, j)]) - velocity * _dt);
-
-			positions[get_indexz(i, j)] = initialPositions[get_indexz(i, j)] - (waveDirection / (2 * glm::pi<float>() / distBetweenWaves)) * amplitude * glm::sin(glm::dot(waveDirection, initialPositions[get_indexz(i, j)]) - velocity * _dt);
-			positions[get_indexz(i, j)].y = amplitude * glm::cos(glm::dot(waveDirection, initialPositions[get_indexz(i, j)]) - velocity * _dt);
+			positions[get_indexz(i, j)] = initialPositions[get_indexz(i, j)] - (GetXZPositions(initialPositions[get_indexz(i, j)], myWaves[0].waveDirection, myWaves[0].amplitude, myWaves[0].distBetweenWaves, myWaves[0].velocity, _dt) + GetXZPositions(initialPositions[get_indexz(i, j)], myWaves[1].waveDirection, myWaves[1].amplitude, myWaves[1].distBetweenWaves, myWaves[1].velocity, _dt));
+			positions[get_indexz(i, j)].y = GetYPositions(initialPositions[get_indexz(i, j)], myWaves[0].waveDirection, myWaves[0].amplitude, myWaves[0].distBetweenWaves, myWaves[0].velocity, _dt) + GetYPositions(initialPositions[get_indexz(i, j)], myWaves[1].waveDirection, myWaves[1].amplitude, myWaves[1].distBetweenWaves, myWaves[1].velocity, _dt);
 		}
 	}
 	/*glm::vec3 result = (waveDirection / (2 * glm::pi<float>() / distBetweenWaves) * amplitude);
@@ -25,4 +22,14 @@ void WaveSystem::CalculateForce(float densityFluid, float gravity, float volume,
 
 	//glm::vec3 dragForces = -(1.0f/2.0f) * densityFluid * dragCoeficient * 
 
+}
+
+glm::vec3 WaveSystem::GetXZPositions(glm::vec3 initialPos, glm::vec3 waveDirection, float amplitude, float distBetweenWaves, float velocity, float _dt)
+{
+	return glm::vec3((waveDirection / (2 * glm::pi<float>() / distBetweenWaves)) * amplitude * glm::sin(glm::dot(waveDirection, initialPos) - velocity * _dt));
+}
+
+float WaveSystem::GetYPositions(glm::vec3 initialPos, glm::vec3 waveDirection, float amplitude, float distBetweenWaves, float velocity, float _dt)
+{
+	return amplitude * glm::cos(glm::dot(waveDirection, initialPos) - velocity * _dt);
 }

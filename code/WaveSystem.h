@@ -3,10 +3,19 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
+struct Wave
+{
+	glm::vec3 waveDirection;
+	float amplitude;
+	float distBetweenWaves;
+	float velocity;
+};
+
+
 class WaveSystem
 {
 	glm::vec3* initialPositions;
-
+	Wave myWaves[2];
 	int width = 0;
 	int height = 0;
 
@@ -16,10 +25,15 @@ class WaveSystem
 	}
 
 public:
-	WaveSystem(glm::vec3* initPos, int _width, int _height) : width(_width), height(_height)
+	WaveSystem(glm::vec3* initPos, int _width, int _height, Wave newWaves[]) : width(_width), height(_height)
 	{
 		int size = width * height;
 		initialPositions = new glm::vec3[size];
+
+		for (int i = 0; i < 2; i++)
+		{
+			myWaves[i] = newWaves[i];
+		}
 
 		for (int row = 0; row < height; row++)
 		{
@@ -33,5 +47,9 @@ public:
 
 	void CalculateForce(float densityFluid, float gravity, float volume, float dragCoeficient);
 
+	glm::vec3 GetXZPositions(glm::vec3 initialPos, glm::vec3 waveDirection, float amplitude, float distBetweenWaves, float velocity, float _dt);
+	float GetYPositions(glm::vec3 initialPos, glm::vec3 waveDirection, float amplitude, float distBetweenWaves, float velocity, float _dt);
+	int GetWidth() { return width; }
+	int GetHeight() { return height; }
 };
 
