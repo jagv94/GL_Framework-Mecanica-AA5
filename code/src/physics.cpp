@@ -1,6 +1,7 @@
 #include <../Mesh.h>
 #include <imgui\imgui.h>
 #include <imgui\imgui_impl_sdl_gl3.h>
+#include "../WaveSystem.h"
 
 namespace LilSpheres {
 	extern const int maxParticles;
@@ -28,7 +29,10 @@ void GUI() {
 	ImGui::End();
 }
 
+double time;
+
 Mesh mesh;
+WaveSystem* wave;
 
 void PhysicsInit() {
 	renderParticles = false; //Desactivar para la entrega o añadir al GUI desactivado por defecto
@@ -36,10 +40,19 @@ void PhysicsInit() {
 	renderCloth = true;
 
 	mesh = Mesh(ClothMesh::numCols, ClothMesh::numRows);
+	wave = new WaveSystem(mesh.positions, ClothMesh::numCols, ClothMesh::numRows);
 	LilSpheres::particleCount = mesh.currentParticles;
+
+	time = 0.0f;
+
 }
 
 void PhysicsUpdate(float dt) {
+
+	time += dt;
+
+	wave->CalculateWave(mesh.positions, glm::vec3(1, 0, 0), 1.0f, 0.5f, 2.0f, time);
+
 	ClothMesh::updateClothMesh(&(mesh.positions[0].x));
 	LilSpheres::updateParticles(0, LilSpheres::particleCount, &(mesh.positions[0].x));
 }
