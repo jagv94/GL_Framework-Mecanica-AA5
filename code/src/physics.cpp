@@ -49,7 +49,6 @@ void PhysicsInit() {
 	LilSpheres::particleCount = mesh.currentParticles;
 
 	time = 0.0f;
-
 }
 
 void PhysicsUpdate(float dt) {
@@ -57,7 +56,6 @@ void PhysicsUpdate(float dt) {
 	time += dt;
 
 	wave->CalculateWave(mesh.positions, glm::vec3(1, 0, 0), 1.0f, 0.5f, 2.0f, time);
-
 	mySphere->SolverEuler(mySphere->CalculateBuoyancy(mesh, 0.997f, -9.81f), dt);
 
 	ClothMesh::updateClothMesh(&(mesh.positions[0].x));

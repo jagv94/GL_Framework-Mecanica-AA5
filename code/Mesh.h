@@ -14,7 +14,7 @@ class Mesh : public ParticleSystem
 {
 private:
 	int size;
-	glm::vec3 posMalla = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::vec3 posMalla = glm::vec3(-7.5f, 0.0f, -6.5f);
 
 	int get_indexz(int row, int col)
 	{
@@ -43,8 +43,8 @@ public:
 		{
 			for (int col = 0; col < width; col++)
 			{
-				positions[get_indexz(row, col)] = glm::vec3(row + posMalla.x, 7.0f + posMalla.y, col + posMalla.z);
-				position_before[get_indexz(row, col)] = glm::vec3(row + posMalla.x, 7.0f + posMalla.y, col + posMalla.z);
+				positions[get_indexz(row, col)] = glm::vec3(row + posMalla.x, posMalla.y, col + posMalla.z);
+				position_before[get_indexz(row, col)] = glm::vec3(row + posMalla.x, posMalla.y, col + posMalla.z);
 				velocity[get_indexz(row, col)] = glm::vec3(0.0f, 0.0f, 0.0f);
 			}
 		}
