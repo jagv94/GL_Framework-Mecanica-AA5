@@ -5,7 +5,7 @@ int SphereClass::get_indexz(int _row, int _width, int _col)
 	return _row * _width + _col;
 }
 
-SphereClass::SphereClass(glm::vec3 _position, float _mass, float _radius) : position(_position), mass(_mass), radius(_radius) {}
+SphereClass::SphereClass(glm::vec3 _position, float _radius) : position(_position), radius(_radius) {}
 
 void SphereClass::SolverEuler(glm::vec3 _forceBuorancy, float _dt)
 {
