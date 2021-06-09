@@ -45,7 +45,7 @@ void PhysicsInit() {
 
 	mesh = Mesh(ClothMesh::numCols, ClothMesh::numRows);
 	wave = new WaveSystem(mesh.positions, ClothMesh::numCols, ClothMesh::numRows, myWaves);
-	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 5.0f, 1.0f);
+	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 0.5f, 1.0f);
 	LilSpheres::particleCount = mesh.currentParticles;
 
 	time = 0.0f;
@@ -60,7 +60,7 @@ void PhysicsUpdate(float dt) {
 
 	ClothMesh::updateClothMesh(&(mesh.positions[0].x));
 	LilSpheres::updateParticles(0, LilSpheres::particleCount, &(mesh.positions[0].x));
-	Sphere::updateSphere(mySphere->GetPosition(), 1);
+	Sphere::updateSphere(mySphere->GetPosition(), mySphere->GetRadius());
 }
 
 void PhysicsCleanup() {

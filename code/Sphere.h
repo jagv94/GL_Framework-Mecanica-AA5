@@ -21,7 +21,7 @@ class SphereClass
 	/// <param name="row">Particulas de la maya de las olas en horizontal</param>
 	/// <param name="width">Anchura de la maya</param>
 	/// <param name="col">Particulas de la maya de las olas en vertical</param>
-	/// <returns>Posición de un punto concreto de la maya</returns>
+	/// <returns>Posiciï¿½n de un punto concreto de la maya</returns>
 	int get_indexz(int _row, int _width, int _col);
 
 public:
@@ -45,5 +45,6 @@ public:
 	
 	glm::vec3 GetPosition() { return position; }
 	float GetMass() { return mass; }
+	float GetRadius() { return radius; }
 };
 
