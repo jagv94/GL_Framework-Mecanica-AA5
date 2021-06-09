@@ -45,7 +45,7 @@ void PhysicsInit() {
 
 	mesh = Mesh(ClothMesh::numCols, ClothMesh::numRows);
 	wave = new WaveSystem(mesh.positions, ClothMesh::numCols, ClothMesh::numRows, myWaves);
-	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 50.0f, 1.0f);
+	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 5.0f, 1.0f);
 	LilSpheres::particleCount = mesh.currentParticles;
 
 	time = 0.0f;

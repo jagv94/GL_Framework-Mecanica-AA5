@@ -21,7 +21,8 @@ glm::vec3 SphereClass::CalculateBuoyancy(Mesh wave, float densityFluid, float _g
 				position.x - radius < wave.positions[get_indexz(i, wave.width, j)].x && position.x + radius > wave.positions[get_indexz(i, wave.width, j)].x &&
 				position.z - radius < wave.positions[get_indexz(i, wave.width, j)].z && position.z + radius > wave.positions[get_indexz(i, wave.width, j)].z)
 			{
-				float volume = (glm::pi<float>() * glm::pow(glm::length((position.y - radius) - wave.positions[get_indexz(i, wave.width, j)].y), 2) / 3) * (3 * radius - (glm::length((position.y - radius) - wave.positions[get_indexz(i, wave.width, j)].y)));
+				float h = glm::length((position.y - radius) - wave.positions[get_indexz(i, wave.width, j)].y);
+				float volume = (glm::pi<float>() * glm::pow(h, 2) / 3.0f) * ((3.0f * radius) - (h));
 
 				//std::cout << volume << std::endl;
 
