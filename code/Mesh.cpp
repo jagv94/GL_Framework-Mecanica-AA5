@@ -10,8 +10,6 @@ Mesh::Mesh(int width, int height) : width(width), height(height), ParticleSystem
 {
 	float z = 0.0f;
 
-	currentParticles = size;
-
 	forces = new glm::vec3[size];
 	positions = new glm::vec3[size];
 	position_before = new glm::vec3[size];
