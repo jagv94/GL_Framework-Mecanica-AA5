@@ -27,5 +27,6 @@ public:
 	glm::vec3 GetPosition() { return position; }
 	float GetMass() { return mass; }
 	glm::vec3 CalculateBuoyancy(Mesh wave, float densityFluid, float gravity);
+	float GetRadius() { return radius; }
 };
 
