@@ -26,7 +26,7 @@ class SphereClass
 	int get_indexz(int _row, int _width, int _col);
 
 public:
-	SphereClass(glm::vec3 _position, float _mass, float _radius);
+	SphereClass(glm::vec3 _position, float _radius);
 
 	/// <summary>
 	/// Solver para el movimiento de la esfera
@@ -47,5 +47,6 @@ public:
 	glm::vec3 GetPosition() { return position; }
 	float GetMass() { return mass; }
 	float GetRadius() { return radius; }
+	void SetMass(float newMass) { mass = newMass; }
 };
 

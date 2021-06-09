@@ -18,6 +18,10 @@ namespace Sphere {
 }
 extern bool renderSphere;
 
+//Variables globales de GUI
+float mass = 1.0f;
+bool restart = false;
+
 bool show_test_window = false;
 void GUI() {
 	bool show = true;
@@ -25,12 +29,22 @@ void GUI() {
 
 	{	
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);//FrameRate
+
+		ImGui::DragFloat("Masa esfera", &mass, 0.005f, 0.0f, 50.0f);
+
+		if (ImGui::Button("Restart")) {
+			
+			restart = !restart;
+
+		}
+
 	}
 	
 	ImGui::End();
 }
 
-double timer;
+double timer = 0.0f;
+double restartTimer = 0.0f;
 
 Mesh mesh;
 WaveSystem* wave;
@@ -44,7 +58,8 @@ void PhysicsInit() {
 
 	mesh = Mesh(ClothMesh::numCols, ClothMesh::numRows);
 	wave = new WaveSystem(mesh.positions, ClothMesh::numCols, ClothMesh::numRows, myWaves);
-	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 0.5f, 1.0f);
+	mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 1.0f);
+	mySphere->SetMass(mass);
 
 	timer = 0.0f;
 }
@@ -53,7 +68,20 @@ void PhysicsUpdate(float dt) {
 
 	timer += dt;
 
-	wave->CalculateWave(mesh.positions, timer);
+	if (restartTimer >= 15.0f || restart)
+	{
+		mySphere = new SphereClass(glm::vec3(0.0f, 8.0f, 0.0f), 1.0f);
+		restart = !restart;
+		restartTimer = 0.0f;
+	}
+	else
+	{
+		restartTimer += dt;
+	}
+
+	mySphere->SetMass(mass);
+
+	wave->CalculateWave(mesh.positions, glm::vec3(1, 0, 0), 1.0f, 0.5f, 2.0f, timer);
 	mySphere->SolverEuler(mySphere->CalculateBuoyancy(mesh, 0.997f, -9.81f), dt);
 
 	ClothMesh::updateClothMesh(&(mesh.positions[0].x));
