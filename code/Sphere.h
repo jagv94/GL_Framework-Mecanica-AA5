@@ -2,6 +2,7 @@
 #include <GL\glew.h>
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
+#include <iostream>
 #include "../Mesh.h"
 
 class SphereClass
@@ -21,7 +22,7 @@ class SphereClass
 	/// <param name="row">Particulas de la maya de las olas en horizontal</param>
 	/// <param name="width">Anchura de la maya</param>
 	/// <param name="col">Particulas de la maya de las olas en vertical</param>
-	/// <returns>Posici�n de un punto concreto de la maya</returns>
+	/// <returns>Posicion de un punto concreto de la maya</returns>
 	int get_indexz(int _row, int _width, int _col);
 
 public:

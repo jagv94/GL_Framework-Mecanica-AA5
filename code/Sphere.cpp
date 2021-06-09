@@ -1,5 +1,4 @@
 #include "Sphere.h"
-#include <iostream>
 
 int SphereClass::get_indexz(int _row, int _width, int _col)
 {

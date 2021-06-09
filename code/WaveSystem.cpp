@@ -1,5 +1,4 @@
 #include "WaveSystem.h"
-#include <iostream>
 
 int WaveSystem::get_indexz(int row, int col)
 {
