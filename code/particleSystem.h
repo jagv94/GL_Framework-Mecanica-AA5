@@ -9,10 +9,8 @@ public:
     glm::vec3* position_before;
 
     int currentParticles;
-    float* age;
-
-
     int maxParticles;
+    float* age;
 
     ParticleSystem(int _numParticles = 100);
     void UpdateParticle(int _idx, glm::vec3 _newPosition);
@@ -20,5 +18,4 @@ public:
     void spawnParticle(glm::vec3 position);
     void updateAge(float _dt);
     void destroyOldParticles(float _maxAge);
-
 };

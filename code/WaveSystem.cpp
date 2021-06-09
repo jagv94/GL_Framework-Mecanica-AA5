@@ -1,6 +1,30 @@
 #include "WaveSystem.h"
 #include <iostream>
 
+int WaveSystem::get_indexz(int row, int col)
+{
+	return row * width + col;
+}
+
+WaveSystem::WaveSystem(glm::vec3* initPos, int _width, int _height, Wave newWaves[]) : width(_width), height(_height)
+{
+	int size = width * height;
+	initialPositions = new glm::vec3[size];
+
+	for (int i = 0; i < 2; i++)
+	{
+		myWaves[i] = newWaves[i];
+	}
+
+	for (int row = 0; row < height; row++)
+	{
+		for (int col = 0; col < width; col++)
+		{
+			initialPositions[get_indexz(row, col)] = initPos[get_indexz(row, col)];
+		}
+	}
+}
+
 void WaveSystem::CalculateWave(glm::vec3* positions, glm::vec3 waveDirection, float distBetweenWaves, float amplitude, float velocity, float _dt)
 {
 	for (int i = 0; i < height; i++)
@@ -32,4 +56,14 @@ glm::vec3 WaveSystem::GetXZPositions(glm::vec3 initialPos, glm::vec3 waveDirecti
 float WaveSystem::GetYPositions(glm::vec3 initialPos, glm::vec3 waveDirection, float amplitude, float distBetweenWaves, float velocity, float _dt)
 {
 	return amplitude * glm::cos(glm::dot(waveDirection, initialPos) - velocity * _dt);
+}
+
+int WaveSystem::GetWidth()
+{
+	return width;
+}
+
+int WaveSystem::GetHeight()
+{
+	return height;
 }
