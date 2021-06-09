@@ -16,6 +16,12 @@ private:
 	int size;
 	glm::vec3 posMalla = glm::vec3(-7.5f, 0.0f, -6.5f);
 
+	/// <summary>
+	/// Calcular la posicion de los puntos de la maya
+	/// </summary>
+	/// <param name="row">Particulas de la maya de las olas en horizontal</param>
+	/// <param name="col">Particulas de la maya de las olas en vertical</param>
+	/// <returns>Posicion de un punto concreto de la maya</returns>
 	int get_indexz(int row, int col);
 
 public:
