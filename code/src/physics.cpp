@@ -37,7 +37,6 @@ void GUI() {
 			restart = !restart;
 
 		}
-
 	}
 	
 	ImGui::End();
