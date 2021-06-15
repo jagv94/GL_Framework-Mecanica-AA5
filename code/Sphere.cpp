@@ -12,7 +12,7 @@ void SphereClass::SolverEuler(glm::vec3 _forceBuorancy, float _dt)
 	force = gravity + _forceBuorancy;
 
 	position = position + velocity * _dt;
-	velocity = velocity + (force / mass) * _dt;
+	velocity = velocity + (force * mass) * _dt;
 
 }
 
